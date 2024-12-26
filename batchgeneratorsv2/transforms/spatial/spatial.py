@@ -256,6 +256,10 @@ class SpatialTransform(BasicTransform):
             del grid
             return result_seg.contiguous()
 
+    def _apply_to_dist_map(self, dist_map: torch.Tensor, **params) -> torch.Tensor:
+        # Distance maps should be transformed like images (using bilinear interpolation)
+        return self._apply_to_image(dist_map, **params)
+
     def _apply_to_regr_target(self, regression_target, **params) -> torch.Tensor:
         return self._apply_to_image(regression_target, **params)
 

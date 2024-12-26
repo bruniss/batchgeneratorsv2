@@ -94,6 +94,11 @@ class InhomogeneousSliceIlluminationTransform(BasicTransform):
     def _apply_to_segmentation(self, segmentation: torch.Tensor, **kwargs) -> torch.Tensor:
         return segmentation  # Don't modify segmentations
 
+    def _apply_to_dist_map(self, dist_map: torch.Tensor, **kwargs) -> torch.Tensor:
+        # DO NOT blank anything in the distance map
+        # (this is an intensity transform, not geometric)
+        return dist_map
+
     def _apply_to_bbox(self, bbox, **kwargs):
         raise NotImplementedError
 

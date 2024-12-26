@@ -27,6 +27,12 @@ class BasicTransform(abc.ABC):
         if data_dict.get('segmentation') is not None:
             data_dict['segmentation'] = self._apply_to_segmentation(data_dict['segmentation'], **params)
 
+        if data_dict.get('dist_map') is not None:
+            data_dict['dist_map'] = self._apply_to_dist_map(data_dict['dist_map'], **params)
+
+        if data_dict.get('geols_labels') is not None:
+            data_dict['geols_labels'] = self._apply_to_dist_map(data_dict['geols_labels'], **params)
+
         if data_dict.get('keypoints') is not None:
             data_dict['keypoints'] = self._apply_to_keypoints(data_dict['keypoints'], **params)
 
@@ -42,6 +48,12 @@ class BasicTransform(abc.ABC):
         pass
 
     def _apply_to_segmentation(self, segmentation: torch.Tensor, **params) -> torch.Tensor:
+        pass
+
+    def _apply_to_dist_map(self, dist_map: torch.Tensor, **params) -> torch.Tensor:
+        pass
+
+    def _apply_to_geols_labels(self, geols_labels: torch.Tensor, **params) -> torch.Tensor:
         pass
 
     def _apply_to_keypoints(self, keypoints, **params):
